@@ -1,9 +1,11 @@
+import 'package:logger/logger.dart';
+import 'package:DonBenny/network_utils/api.dart';
 import 'package:flutter/material.dart';
-import '../../size_config.dart';
 import 'components/home_drawer.dart';
 import 'components/card_with_network_image.dart';
 import '../../models/category.dart';
 import 'components/body.dart';
+import '../../constants.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
@@ -31,8 +33,16 @@ class _HomeScreenState extends State<HomeScreen> {
           "http://deliverapp.sedi.pe/deliveryapp/upload/slider/1602478995436.jpg",
     ),
   ];
+
+  List<Category> categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getCategories();
+  }
+
   
-  List<Category> categories = demoCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -42,4 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: HomeDrawer(),
     );
   }
+ void _getCategories() async {
+    var data = {'accesskey': kAccessKey};
+    var res = await Network().getData('get-categories.php', data);
+    final List<dynamic> categoriesJsonList = res.data['data'];
+    final categoriesList = Category.collectionFromJsonList(categoriesJsonList);
+    setState(() {
+      categories = categoriesList;
+    });
+  }
+
 }

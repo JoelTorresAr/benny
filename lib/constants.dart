@@ -45,3 +45,5 @@ OutlineInputBorder outlineInputBorder() {
       borderRadius: BorderRadius.circular(15),
       borderSide: BorderSide(color: kPrimaryColor));
 }
+
+const String kAccessKey = "90336";

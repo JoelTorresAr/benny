@@ -40,7 +40,7 @@ class Body extends StatelessWidget {
               ),
               HomeCarouselSlider(cardList: cardList),
               SizedBox(
-                height: getProportionateScreenWidth(5),
+                height: getProportionateScreenWidth(10),
               ),
               Categories(categories: categories)
             ],
