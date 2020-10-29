@@ -1,9 +1,10 @@
+import 'package:DonBenny/components/section_title.dart';
 import 'package:flutter/material.dart';
 import '../../../size_config.dart';
 import 'home_header.dart';
 import 'search_field.dart';
 import 'home_carousel_slider.dart';
-import 'categories.dart';
+import '../../../components/categories.dart';
 import '../../../models/category.dart';
 
 
@@ -29,6 +30,8 @@ class Body extends StatelessWidget {
             top: getProportionateScreenWidth(30)),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HomeHeader(scaffoldKey: _scaffoldKey),
               SizedBox(
@@ -36,13 +39,17 @@ class Body extends StatelessWidget {
               ),
               SearchField(),
               SizedBox(
-                height: getProportionateScreenWidth(5),
+                height: getProportionateScreenWidth(20),
               ),
               HomeCarouselSlider(cardList: cardList),
               SizedBox(
+                height: getProportionateScreenWidth(20),
+              ),
+              SectionTitle(text: "Comprar por categoría", press: null),
+              SizedBox(
                 height: getProportionateScreenWidth(10),
               ),
-              Categories(categories: categories)
+              Categories(categories: categories),
             ],
           ),
         ),

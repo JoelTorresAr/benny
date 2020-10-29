@@ -1,3 +1,5 @@
+import 'package:DonBenny/screens/subCategories/sub_categories_screen.dart';
+
 import 'screens/sign_in/sign_in_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
@@ -14,4 +16,5 @@ final Map<String, WidgetBuilder> routes = {
   ScreenTrips.routeName: (context) => ScreenTrips(),
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   SignInScreen.routeName: (context) => SignInScreen(),
+  SubCategoriesScreen.routeName: (context) => SubCategoriesScreen(),
 };

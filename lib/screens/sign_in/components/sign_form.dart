@@ -1,7 +1,6 @@
-import 'dart:convert';
-
+import 'package:DonBenny/screens/screen_trips.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../network_utils/api.dart';
 
@@ -12,7 +11,6 @@ import '../../../size_config.dart';
 import '../../../components/form_error.dart';
 import '../../../components/custom_suffix_icon.dart';
 import '../../../components/default_button.dart';
-import '../../home/home_screen.dart';
 
 class SignForm extends StatefulWidget {
   const SignForm({Key key, @required GlobalKey<ScaffoldState> scaffoldKey})
@@ -196,19 +194,29 @@ class _SignFormState extends State<SignForm> {
     );
   }
 
-
   void _login() async {
     setState(() {
       _isLoading = true;
     });
-    var data = {'mobile': phoneNumber, 'password': password, 'accesskey': kAccessKey};
+    var data = {
+      'mobile': phoneNumber,
+      'password': password,
+      'accesskey': kAccessKey
+    };
 
     var res = await Network().getData('login.php', data);
     var body = res.data;
     if (!body['error']) {
+      Navigator.pushReplacement(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => ScreenTrips(),
+        ),
+      );
+      /*
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).popAndPushNamed(HomeScreen.routeName);
-      });
+        Navigator.of(context).popAndPushNamed(ScreenTrips.routeName);
+      });*/
       //Navigator.popAndPushNamed(context, HomeScreen.routeName);
     } else {
       _showMsg(body['message']);

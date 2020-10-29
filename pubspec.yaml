@@ -21,6 +21,7 @@ dependencies:
   built_value: ^7.1.0
   built_collection: ^4.3.2
   dio: ^3.0.10
+  jaguar_jwt: ^2.1.6
 
   http: ^0.12.2
   shared_preferences: ^0.5.12+2

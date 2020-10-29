@@ -1,8 +1,9 @@
+import 'package:DonBenny/screens/subCategories/sub_categories_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../../constants.dart';
-import '../../../size_config.dart';
-import '../../../models/category.dart';
+import '../constants.dart';
+import '../size_config.dart';
+import '../models/category.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -15,7 +16,16 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        //Navigator.popAndPushNamed(context, SubCategoriesScreen.routeName,
+         //   arguments: SubCategoriesArguments(category: category));
+        //Navigator.of(context).pushNamed(SubCategoriesScreen.routeName);
+
+       Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => SubCategoriesScreen(
+                  category: category,
+                )));
+      },
       borderRadius: BorderRadius.circular(20),
       child: Container(
         width: SizeConfig.screenWidth * 0.30,

@@ -22,15 +22,15 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> cardList = [
     CardWithNetworkImage(
       imageUrl:
-          "http://deliverapp.sedi.pe/deliveryapp/upload/slider/1602478974297.jpg",
+          "https://delivery-benny.herokuapp.com/upload/slider/1601685843845.jpg",
     ),
     CardWithNetworkImage(
       imageUrl:
-          "http://deliverapp.sedi.pe/deliveryapp/upload/slider/1602478960166.jpg",
+          "https://delivery-benny.herokuapp.com/upload/slider/1601685853499.jpg",
     ),
     CardWithNetworkImage(
       imageUrl:
-          "http://deliverapp.sedi.pe/deliveryapp/upload/slider/1602478995436.jpg",
+          "https://delivery-benny.herokuapp.com/upload/slider/1601685843846.jpg",
     ),
   ];
 

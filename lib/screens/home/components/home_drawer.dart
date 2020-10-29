@@ -50,7 +50,9 @@ class HomeDrawer extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
             onTap: () {
-              Navigator.pushNamed(context, SplashScreen.routeName);
+              Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => SplashScreen()), (r) => false);
+              //Navigator.pushNamed(context, SplashScreen.routeName);
             },
           ),
           ListTile(
