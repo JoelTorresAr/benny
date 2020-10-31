@@ -6,7 +6,7 @@ import 'cart/cart_screen.dart';
 import 'categories/categories_screen.dart';
 import 'favorites/favorites_screen.dart';
 
-class ScreenTrips extends StatelessWidget {
+class ScreenTripsCupertino extends StatelessWidget {
   static String routeName = "/trips";
   @override
   Widget build(BuildContext context) {

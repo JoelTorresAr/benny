@@ -42,24 +42,27 @@ class _HomeScreenState extends State<HomeScreen> {
     _getCategories();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: Body(scaffoldKey: _scaffoldKey, cardList: cardList, categories: categories),
+      body: Body(
+          scaffoldKey: _scaffoldKey,
+          cardList: cardList,
+          categories: categories),
       drawer: HomeDrawer(),
     );
   }
- void _getCategories() async {
+
+  void _getCategories() async {
     var data = {'accesskey': kAccessKey};
     var res = await Network().getData('get-categories.php', data);
     final List<dynamic> categoriesJsonList = res.data['data'];
     final categoriesList = Category.collectionFromJsonList(categoriesJsonList);
-    setState(() {
-      categories = categoriesList;
-    });
+    if (this.mounted) {
+      setState(() {
+        categories = categoriesList;
+      });
+    }
   }
-
 }

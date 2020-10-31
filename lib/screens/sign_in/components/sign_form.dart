@@ -1,6 +1,8 @@
-import 'package:DonBenny/screens/screen_trips.dart';
+import 'dart:convert';
+
+import 'package:DonBenny/screens/screen_trips_off.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../network_utils/api.dart';
 
@@ -10,7 +12,7 @@ import '../../../constants.dart';
 import '../../../size_config.dart';
 import '../../../components/form_error.dart';
 import '../../../components/custom_suffix_icon.dart';
-import '../../../components/default_button.dart';
+import '../../../models/user.dart';
 
 class SignForm extends StatefulWidget {
   const SignForm({Key key, @required GlobalKey<ScaffoldState> scaffoldKey})
@@ -23,11 +25,18 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
+  @override
+  void initState() {
+    super.initState();
+    _verifyToken();
+  }
+
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   String phoneNumber;
   String password;
   bool remember = false;
+  bool logged = false;
   void _showMsg(msg) {
     final snackBar = SnackBar(
       content: Text(msg),
@@ -207,10 +216,14 @@ class _SignFormState extends State<SignForm> {
     var res = await Network().getData('login.php', data);
     var body = res.data;
     if (!body['error']) {
+      var user = User.fromJson(body);
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('user', json.encode(user));
+      localStorage.setBool('remember', remember);
       Navigator.pushReplacement(
         context,
         CupertinoPageRoute(
-          builder: (context) => ScreenTrips(),
+          builder: (context) => ScreenTripsOff(),
         ),
       );
       /*
@@ -221,9 +234,23 @@ class _SignFormState extends State<SignForm> {
     } else {
       _showMsg(body['message']);
     }
-
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void _verifyToken() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var memoryLogged = localStorage.getBool('remember');
+    if (memoryLogged != null && memoryLogged != false) {
+      if (memoryLogged) {
+        Navigator.pushReplacement(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => ScreenTripsOff(),
+          ),
+        );
+      }
+    }
   }
 }

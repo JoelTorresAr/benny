@@ -1,4 +1,6 @@
+import 'package:DonBenny/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import '../../splash/splash_screen.dart';
@@ -10,6 +12,13 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _closeSession() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove("remember");
+      prefs.remove("user");
+      Navigator.of(context).pushNamedAndRemoveUntil(SignInScreen.routeName, (Route<dynamic> route) => false);
+    }
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -50,8 +59,10 @@ class HomeDrawer extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
             onTap: () {
-              Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (context) => SplashScreen()), (r) => false);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => SplashScreen()),
+                  (r) => false);
               //Navigator.pushNamed(context, SplashScreen.routeName);
             },
           ),
@@ -226,17 +237,7 @@ class HomeDrawer extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
             onTap: () {
-              Navigator.pushNamed(context, SplashScreen.routeName);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.input),
-            title: Text(
-              'Cerrar sesión',
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, SplashScreen.routeName);
+              _closeSession();
             },
           ),
         ],

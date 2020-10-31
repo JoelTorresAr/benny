@@ -27,7 +27,8 @@ class Body extends StatelessWidget {
         padding: EdgeInsets.only(
             left: getProportionateScreenWidth(10),
             right: getProportionateScreenWidth(10),
-            top: getProportionateScreenWidth(30)),
+            top: getProportionateScreenWidth(5)
+            ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

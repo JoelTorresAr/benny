@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/category.dart';
 import 'category_card.dart';
 
-
-
 class Categories extends StatelessWidget {
   const Categories({
     Key key,

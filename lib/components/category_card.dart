@@ -8,7 +8,7 @@ import '../models/category.dart';
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
     Key key,
-    @required this.category,
+    @required this.category
   }) : super(key: key);
 
   final Category category;
